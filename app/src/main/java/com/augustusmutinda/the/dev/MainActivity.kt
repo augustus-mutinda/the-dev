@@ -40,6 +40,12 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         val state by developerViewmodel.developerOptionsState.collectAsState()
+                        val adbIP by developerViewmodel.adbIP.collectAsState()
+
+                        if (adbIP.isNotEmpty()) {
+                            Text("ADB Ip", color = White)
+                            Text(adbIP, color = White)
+                        }
 
                         when (state) {
                             "Default" -> {
@@ -76,7 +82,10 @@ class MainActivity : ComponentActivity() {
                             }
 
                             "unavailable" -> {
-                                Text("Developer Options Are restricted on this device.", color = White)
+                                Text(
+                                    "Developer Options Are restricted on this device.",
+                                    color = White
+                                )
                             }
                         }
                     }
